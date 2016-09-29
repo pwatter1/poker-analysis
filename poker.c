@@ -105,13 +105,13 @@ int is_straight(struct player *p)
 int is_straight_flush(struct player *p)
 {
 	/* Detect straight flush. A straight flush is nothing but a straight and a flush */
+	/* Use and manipulator to test if bit set, if both bits set to one, return straight flush */
 	if(((*p).vector & (1UL << 40) == 1) && ((*p).vector && (1UL << 41) == 1)){return 1;}
 	return 0; 
 }
 		
 
 /* This is the main function that converts the player's hand into weighted unsigned long number. 
-
  * It is a 55bit vector as shown below (2 is the LSB and StraightFlush is the MSB) */
 /* 2, 3, 4, 5, 6, 7, 8, 9, T, J, Q, K, A, 22, 33, 44, 55, 66, 77, 88, 99, TT, JJ, QQ, KK, AA,
  * 222, 333, 444, 555, 666, 777, 888, 999, TTT, JJJ, QQQ, KKK, AAA, Straight, Flush, 2222, 3333, 
@@ -172,6 +172,8 @@ void compare_hands(FILE *fp)
 	char p1[5][3];
 	char p2[5][3];
 	int i;
+	
+	/*print output to output.txt */		
 	FILE *op;
 	op = fopen("Output.txt", "w");
 
@@ -190,8 +192,7 @@ void compare_hands(FILE *fp)
 		
 		if(P1.vector >= P2.vector){fprintf(op, "Player 1 wins\n");}
 		else{fprintf(op, "Player 2 wins\n");}
-		
-	/*print output to output.txt */		
+	
 	}
 	fclose(op);
 	fclose(fp);
