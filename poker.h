@@ -14,8 +14,8 @@ struct card {
 
 struct player {
 	struct card cards[5]; /* 5 cards for each player */
-	unsigned int card_count[13]; /* counters for each of the 13 cards */
-	unsigned long vector;
+	unsigned int card_count[13]; /* counters for each of the 13 card values */
+	unsigned long vector; /* 55 bit vector to manage strength of the cards */
 };
 
 /* Insert declarations for functions in poker.c here. */
